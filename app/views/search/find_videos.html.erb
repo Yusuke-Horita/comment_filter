@@ -1,0 +1,36 @@
+<%= form_with url: root_path, method: :get, local: true do |f| %>
+	<%= f.text_field :video_id, placeholder: "VIDEO ID", value: @video_id %>
+	<% if @sort == "評価順" %>
+		<%= f.radio_button :sort, :評価順, checked: true %>
+	<% else %>
+		<%= f.radio_button :sort, :評価順 %>
+	<% end %>
+	<%= f.label :sort_評価順, "評価順" %>
+	<% if @sort == "新着順" %>
+		<%= f.radio_button :sort, :新着順, checked: true %>
+	<% else %>
+		<%= f.radio_button :sort, :新着順 %>
+	<% end %>
+	<%= f.label :sort_新着順, "新着順" %>
+	<%= f.submit "検索" %>
+<% end %>
+<% if @comments %>
+	<table border="1">
+		<thead>
+			<tr>
+				<th>名前</th>
+				<th>コメント</th>
+			</tr>
+		</thead>
+		<tbody>
+		<% @comments.each do |comment| %>
+			<% if comment.snippet.top_level_comment.snippet.text_display =~ /(?:\p{Hiragana}|\p{Katakana}|[一-龠々])/ %>
+			<tr>
+				<td width="100px"><%= comment.snippet.top_level_comment.snippet.author_display_name %></td>
+				<td><%= comment.snippet.top_level_comment.snippet.text_display %></td>
+			</tr>
+			<% end %>
+		<% end %>
+		</tbody>
+	</table>
+<% end %>
