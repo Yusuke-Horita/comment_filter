@@ -7,13 +7,13 @@ apt-get install -y build-essential \
 									 default-mysql-client \
 									 vim
 
-RUN mkdir /API_app
+RUN mkdir /comment_filter
 
-WORKDIR /API_app
+WORKDIR /comment_filter
 
-COPY Gemfile /API_app/Gemfile
-COPY Gemfile.lock /API_app/Gemfile.lock
+COPY Gemfile /comment_filter/Gemfile
+COPY Gemfile.lock /comment_filter/Gemfile.lock
 
 RUN bundle install
 
-COPY . /API_app
+COPY . /comment_filter

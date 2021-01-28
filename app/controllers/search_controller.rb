@@ -1,15 +1,15 @@
 class SearchController < ApplicationController
-  def find_videos
+  def find_comments
     @video_id =  ""
     @sort = "評価順"
 
     if params[:video_id] != "" && params[:video_id] != nil
 
       require 'google/apis/youtube_v3'
-      youtube = Google::Apis::YoutubeV3::YouTubeService.new
-      youtube.key = ENV['API_KEY']
+      @youtube = Google::Apis::YoutubeV3::YouTubeService.new
+      @youtube.key = ENV['API_KEY']
 
-      next_page_token = nil
+      @next_page_token = nil
       @video_id = params[:video_id]
       @sort = params[:sort]
 
@@ -17,24 +17,32 @@ class SearchController < ApplicationController
         opt = {
           max_results: 100,
           order: "relevance",
-          page_token: next_page_token,
+          page_token: @next_page_token,
           text_format: 'plainText',
           video_id: @video_id
         }
       else
         opt = {
           max_results: 100,
-          page_token: next_page_token,
+          page_token: @next_page_token,
           text_format: 'plainText',
           video_id: @video_id
         }
       end
 
-      begin
-        @comments = youtube.list_comment_threads(:snippet, opt).items
-      rescue
-        @comments = nil
-      end
+        @comments = @youtube.list_comment_threads(:snippet, opt).items
+
     end
+  end
+  
+  def find_reply(comment_id)
+    opt = {
+      max_results: 100,
+      page_token: next_page_token,
+      text_format: 'plainText',
+      parent_id: comment_id
+    }
+
+    list_comments(:snippet, opt).items
   end
 end
