@@ -30,7 +30,7 @@ class SearchController < ApplicationController
         }
       end
 
-        @comments = @youtube.list_comment_threads(:snippet, opt).items
+      @comments = @youtube.list_comment_threads(:snippet, opt).items
 
     end
   end
