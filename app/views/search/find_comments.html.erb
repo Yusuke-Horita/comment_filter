@@ -14,41 +14,46 @@
 	<%= f.label :sort_新着順, "新着順" %>
 	<%= f.submit "検索" %>
 <% end %>
-<%= @comment %>
+
 <% if @comments %>
-	<table border="1">
-		<thead>
-			<tr>
-				<th>名前</th>
-				<th>コメント</th>
-			</tr>
-		</thead>
-		<tbody>
+	<div class="comment_list">
 		<% @comments.each do |comment| %>
 			<% if comment.snippet.top_level_comment.snippet.text_display =~ /(?:\p{Hiragana}|\p{Katakana}|[一-龠々])/ %>
-			<tr>
-				<td width="100px"><%= comment.snippet.top_level_comment.snippet.author_display_name %></td>
-				<td><%= comment.snippet.top_level_comment.snippet.text_display %></td>
-			</tr>
-				<% if comment.snippet.total_reply_count > 0 %>
-					<%= opt = {
-								max_results: 100,
-								page_token: @next_page_token,
-								text_format: 'plainText',
-								parent_id: comment.snippet.top_level_comment.id
-					} %>
-					<% @youtube.list_comments(:snippet, opt).items.reverse_each do |reply| %>
-					<tr>
-						<td></td>
-						<td>▶︎ <%= reply.snippet.text_display %></td>
-					</tr>
-					<% end %>
-				<% end %>
-			<tr>
-				<td colspan="2">　</td>
-			</tr>
+				<section class="comment">
+					<div class="comment_author_profile_image">
+						<img src="<%= comment.snippet.top_level_comment.snippet.author_profile_image_url %>" alt="プロフィール画像お">
+					</div>
+					<div class="comment_main">
+						<div class="comment_header">
+							<span><%= comment.snippet.top_level_comment.snippet.author_display_name %></span>
+							<span><%= time_ago_in_words(comment.snippet.top_level_comment.snippet.updated_at) %>前</span>
+						</div>
+						<div class="comment_body">
+							<span><%= simple_format(comment.snippet.top_level_comment.snippet.text_display) %></span>
+						</div>
+						<div class="comment_body_renderer">
+							<span>続きを読む</span>
+						</div>
+						<div class="comment_like_count">
+							<span><i class="fas fa-thumbs-up"></i> <%= comment.snippet.top_level_comment.snippet.like_count %></span>
+						</div>
+						<div class="comment_replies" id="comment_replies_<%= comment.id %>">
+							<% if comment.snippet.total_reply_count > 0 %>
+								<div class="replies_renderer">
+									<span>
+										<%= link_to search_find_reply_path(comment_id: comment.id), remote: :true do %>
+											<i class="fas fa-chevron-down"></i> <%= comment.snippet.total_reply_count %>件の返信を表示
+										<% end %>
+									</span>
+								</div>
+								<div class="cv-spinner">
+									<span class="spinner"></span>
+								</div>
+							<% end %>
+						</div>
+					</div>
+				</section>
 			<% end %>
 		<% end %>
-		</tbody>
-	</table>
+	</div>
 <% end %>

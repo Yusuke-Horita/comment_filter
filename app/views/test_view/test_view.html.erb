@@ -1,142 +1,51 @@
-<div class="comment_list">
-	<section class="comment">
-		<div class="comment_author_profile_image">
-			<%= image_tag "profile_image_1.jpg", class: "comment_profile_image" %>
-		</div>
-		<div class="comment_main">
-			<div class="comment_header">
-				<span>author_name</span>
-				<span>created_at</span>
-			</div>
-			<div class="comment_body">
-				<spna>テキストテキストテキストテキストテキストテキストテキスト<br>
-					テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト</spna>
-			</div>
-			<div class="comment_like_count">
-				<span>いいね 69</span>
-			</div>
-			<div class="replies_renderer">
-				<span>4件の返信を表示</span>
-			</div>
-			<div class="comment_replies">
-				<section class="reply">
-					<div class="reply_author_profile_image">
+<% if @comments %>
+	<div class="comment_list">
+		<% @comments.each do |comment| %>
+			<% if comment.snippet.top_level_comment.snippet.text_display =~ /(?:\p{Hiragana}|\p{Katakana}|[一-龠々])/ %>
+				<section class="comment">
+					<div class="comment_author_profile_image">
 						<%= image_tag "profile_image_1.jpg", class: "comment_profile_image" %>
 					</div>
 					<div class="comment_main">
 						<div class="comment_header">
-							<span>author_name</span>
-							<span>created_at</span>
+							<span><%= comment.snippet.top_level_comment.snippet.author_display_name %></span>
+							<span><%= comment.snippet.top_level_comment.snippet.updated_at %></span>
 						</div>
 						<div class="comment_body">
-							<spna>テキストテキストテキストテキストテキストテキストテキスト<br>
-								テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト</spna>
+							<spna><%= comment.snippet.top_level_comment.snippet.text_display %></spna>
 						</div>
 						<div class="comment_like_count">
 							<span>いいね 69</span>
 						</div>
-					</div>
-				</section>
-				<section class="reply">
-					<div class="reply_author_profile_image">
-						<%= image_tag "profile_image_1.jpg", class: "comment_profile_image" %>
-					</div>
-					<div class="comment_main">
-						<div class="comment_header">
-							<span>author_name</span>
-							<span>created_at</span>
-						</div>
-						<div class="comment_body">
-							<spna>テキストテキストテキストテキストテキストテキストテキスト<br>
-								テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト</spna>
-						</div>
-						<div class="comment_like_count">
-							<span>いいね 69</span>
-						</div>
-					</div>
-				</section>
-				<section class="reply">
-					<div class="reply_author_profile_image">
-						<%= image_tag "profile_image_1.jpg", class: "comment_profile_image" %>
-					</div>
-					<div class="comment_main">
-						<div class="comment_header">
-							<span>author_name</span>
-							<span>created_at</span>
-						</div>
-						<div class="comment_body">
-							<spna>テキストテキストテキストテキストテキストテキストテキスト<br>
-								テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト</spna>
-						</div>
-						<div class="comment_like_count">
-							<span>いいね 69</span>
+						<% if comment.snippet.total_reply_count > 0 %>
+							<div class="replies_renderer">
+								<%= link_to "4件の返信を表示", search_find_reply_path, remote: :true %>
+								<span><i class="fas fa-chevron-down"></i> 4件の返信を表示</span>
+							</div>
+						<% end %>
+						<div class="comment_replies">
+							<section class="reply">
+								<div class="reply_author_profile_image">
+									<%= image_tag "profile_image_1.jpg", class: "comment_profile_image" %>
+								</div>
+								<div class="comment_main">
+									<div class="comment_header">
+										<span>author_name</span>
+										<span>created_at</span>
+									</div>
+									<div class="comment_body">
+										<spna>テキストテキストテキストテキストテキストテキストテキスト<br>
+											テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト</spna>
+									</div>
+									<div class="comment_like_count">
+										<span>いいね 69</span>
+									</div>
+								</div>
+							</section>
 						</div>
 					</div>
 				</section>
-			</div>
-		</div>
-	</section>
-	<section class="comment">
-		<div class="comment_author_profile_image">
-			<%= image_tag "profile_image_1.jpg", class: "comment_profile_image" %>
-		</div>
-		<div class="comment_main">
-			<div class="comment_header">
-				<span>author_name</span>
-				<span>created_at</span>
-			</div>
-			<div class="comment_body">
-				<spna>テキストテキストテキストテキストテキストテキストテキスト<br>
-					テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト</spna>
-			</div>
-			<div class="comment_like_count">
-				<span>いいね 69</span>
-			</div>
-			<div class="replies_renderer">
-				<span>▼ 4件の返信を表示</span>
-			</div>
-		</div>
-	</section>
-	<section class="comment">
-		<div class="comment_author_profile_image">
-			<%= image_tag "profile_image_1.jpg", class: "comment_profile_image" %>
-		</div>
-		<div class="comment_main">
-			<div class="comment_header">
-				<span>author_name</span>
-				<span>created_at</span>
-			</div>
-			<div class="comment_body">
-				<spna>テキストテキストテキストテキストテキストテキストテキスト<br>
-					テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト</spna>
-			</div>
-			<div class="comment_like_count">
-				<span>いいね 69</span>
-			</div>
-			<div class="replies_renderer">
-				<span>▼ 4件の返信を表示</span>
-			</div>
-		</div>
-	</section>
-	<section class="comment">
-		<div class="comment_author_profile_image">
-			<%= image_tag "profile_image_1.jpg", class: "comment_profile_image" %>
-		</div>
-		<div class="comment_main">
-			<div class="comment_header">
-				<span>author_name</span>
-				<span>created_at</span>
-			</div>
-			<div class="comment_body">
-				<spna>テキストテキストテキストテキストテキストテキストテキスト<br>
-					テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト</spna>
-			</div>
-			<div class="comment_like_count">
-				<span>いいね 69</span>
-			</div>
-			<div class="replies_renderer">
-				<span>▼ 4件の返信を表示</span>
-			</div>
-		</div>
-	</section>
-</div>
+			<% end %>
+		<% end %>
+	</div>
+<% end %>
