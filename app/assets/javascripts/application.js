@@ -17,6 +17,12 @@
 //= require_tree .
 
 $(function() {
+	$('.replies_renderer span').on('click', function() {
+			$(this).parent().next().css('display', 'flex');
+	});
+});
+
+$(function() {
 	$(document).on('click', ".replies_renderer_active span", function(){
 			$(this).parents('.replies_renderer').nextAll('section').hide();
 			$(this).html('<i class="fas fa-chevron-down"></i> 返信を表示');
