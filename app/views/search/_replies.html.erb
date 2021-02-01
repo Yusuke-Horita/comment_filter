@@ -3,7 +3,7 @@
 		<span><i class="fas fa-chevron-up"></i> 返信を非表示</span>
 	</div>
 </div>
-<% replies.reverse_each do |reply| %>
+<% @replies.reverse_each do |reply| %>
 	<section class="reply">
 		<div class="reply_author_profile_image">
 			<img src="<%= reply.snippet.author_profile_image_url %>" alt="">

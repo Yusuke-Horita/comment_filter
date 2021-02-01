@@ -16,9 +16,22 @@
 //= require turbolinks
 //= require_tree .
 
+$(function(){
+		if ($("#video_id").val().length == 0) {
+			$("#submit").prop("disabled", true);
+		}
+	$("#video_id").on("keydown keyup keypress change", function() {
+		if ($(this).val().length < 1) {
+			$("#submit").prop("disabled", true);
+		} else {
+			$("#submit").prop("disabled", false);
+		}
+	});
+});
+
 $(function() {
-	$('.replies_renderer span').on('click', function() {
-			$(this).parent().next().css('display', 'flex');
+	$('input[type="submit"]').on('click', function() {
+		$(this).parent().next().children().css('display', 'flex');
 	});
 });
 
