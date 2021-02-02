@@ -86,6 +86,8 @@ class SearchController < ApplicationController
       rescue
         @comments = "このIDの動画は存在しません。"
       end
+    else
+      @comments = "IDを入力してください。"
     end
   end
   

@@ -1,21 +1,19 @@
-<div class="cv-spinner">
-	<span class="spinner"></span>
-</div>
-
 <% if @comments.empty? %>
 
-	<p>500件以内に日本語のコメントはありませんでした。</p>
+	<div style="margin-top: 200px; text-align: center;">
+		<span>500件以内に日本語のコメントはありませんでした。</span>
+	</div>
 
 <% elsif @comments.is_a?(String) %>
 
-	<p><%= @comments %></p>
+	<div style="margin-top: 200px; text-align: center;">
+		<span><%= @comments %></span>
+	</p>
 
 <% else %>
-
-	<%= @comments.size %>
-	<%= @next_page_token %>
-	<%= @if %>
-
+	<% if @num == 0 %>
+		<div class="headspace"></div>
+	<% end %>
 	<% @comments.each do |comment| %>
 		<section class="comment">
 			<div class="comment_author_profile_image">
@@ -53,22 +51,38 @@
 		</section>
 	<% end %>
 	<% if @next_page_token %>
-		<div id="comment_list_<%= @num + 1 %>">
+		<div id="comment_list_<%= @num + 1 %>" class="comment_list">
 			<div class="next_page">
 				<span><%= link_to "他のコメントを表示", root_path(video_id: @video_id, sort: @sort, next_page_token: @next_page_token, num: @num), remote: :true %></span>
-			</div>
-			<div class="cv-spinner">
-				<span class="spinner"></span>
+				<div class="cv-spinner">
+					<span class="spinner"></span>
+				</div>
 			</div>
 		</div>
 	<% end %>
 
 	<script>
 		$(function() {
-			$('.replies_renderer span, .next_page span').on('click', function() {
+			$('.replies_renderer span').on('click', function() {
 					$(this).parent().next().css('display', 'flex');
+					$(this).parent().next().children().css({
+						'border':'3px gray solid',
+						'border-top':'3px rgba(0, 0, 0, 0) solid'
+					});
+			});
+			$('.next_page span').on('click', function() {
+					$('.next_page .spinner').css({
+						'border':'3px gray solid',
+						'border-top':'3px rgba(0, 0, 0, 0) solid'
+					});
 			});
 		});
 	</script>
 
 <% end %>
+
+<div class="filter">
+	<div class="cv-spinner">
+		<span class="spinner-large"></span>
+	</div>				
+</div>

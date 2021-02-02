@@ -1,22 +1,38 @@
 <%= form_with url: root_path, method: :get do |f| %>
-	<%= f.text_field :video_id, placeholder: "VIDEO ID", value: @video_id %>
+<div class="search-wrapper">
+	<div class="input-holder">
+		<%= f.text_field :video_id, placeholder: "Enter the Video ID", value: @video_id, class: "search-input" %>
+		<div class="search-icon" onclick="searchToggle(this, event);"><span></span></div>
+		<%= f.submit "submit", class: "submit" %>
+	</div>
+	<span class="close" onclick="searchToggle(this, event);"></span>
+</div>
+<div class="toppage_text">
+	<span>Tap the icon.</span>
+</div>
+
+<fieldset>
 	<% if @sort == "評価順" %>
-		<%= f.radio_button :sort, :評価順, checked: true %>
+		<%= f.radio_button :sort, :評価順, checked: true, class: "radio-inline__input" %>
 	<% else %>
-		<%= f.radio_button :sort, :評価順 %>
+		<%= f.radio_button :sort, :評価順, class: "radio-inline__input" %>
 	<% end %>
-	<%= f.label :sort_評価順, "評価順" %>
+	<%= f.label :sort_評価順, "評価順", class: "radio-inline__label" %>
+
 	<% if @sort == "新着順" %>
-		<%= f.radio_button :sort, :新着順, checked: true %>
+		<%= f.radio_button :sort, :新着順, checked: true, class: "radio-inline__input" %>
 	<% else %>
-		<%= f.radio_button :sort, :新着順 %>
+		<%= f.radio_button :sort, :新着順, class: "radio-inline__input" %>
 	<% end %>
-	<%= f.label :sort_新着順, "新着順" %>
-	<%= f.submit "検索", id: "submit" %>
+	<%= f.label :sort_新着順, "新着順", class: "radio-inline__label" %>
+</fieldset>
+
 <% end %>
 
 <div id="comment_list_0">
-	<div class="cv-spinner">
-		<span class="spinner"></span>
+	<div class="cv-spinner-large">
+		<div class="cv-spinner">
+			<span class="spinner-large"></span>
+		</div>
 	</div>
 </div>
