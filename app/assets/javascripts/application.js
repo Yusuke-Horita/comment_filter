@@ -98,15 +98,3 @@ function searchToggle(obj, evt){
 			}
 }
 
-var startPos = 0,winScrollTop = 0;
-$(window).on('scroll',function(){
-		winScrollTop = $(this).scrollTop();
-		if (!$('.search-wrapper').hasClass('active')) {
-			if (winScrollTop > startPos) {
-				$('.search-wrapper').fadeOut();
-    	} else {
-        $('.search-wrapper').fadeIn();
-    	}
-		}
-    startPos = winScrollTop;
-});
