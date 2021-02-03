@@ -11,12 +11,29 @@ class SearchController < ApplicationController
 
       @video_id = params[:video_id]
       @sort = params[:sort]
-      next_page_token = params[:next_page_token]
+
+      if @video_id.include?("&feature=youtu.be")
+        @video_id = @video_id.gsub("&feature=youtu.be", "")
+      end
 
       if params[:num] == nil
         @num = 0
+
+        if @video_id.include?("https://www.youtube.com/watch?v=")
+          @video_id_2 = @video_id.gsub("https://www.youtube.com/watch?v=", "")
+        elsif @video_id.include?("https://m.youtube.com/watch?v=")
+          @video_id_2 = @video_id.gsub("https://m.youtube.com/watch?v=", "")
+        elsif @video_id.include?("https://youtu.be/")
+          @video_id_2 = @video_id.gsub("https://youtu.be/", "")
+        else
+          @comments = "このURLの動画は存在しません。"
+          @num = 0
+          return
+        end
       else
         @num = params[:num].to_i + 1
+        @video_id_2 = params[:video_id_2]
+        next_page_token = params[:next_page_token]
       end
 
       if @sort == "評価順"
@@ -25,14 +42,14 @@ class SearchController < ApplicationController
           order: "relevance",
           page_token: next_page_token,
           text_format: 'plainText',
-          video_id: @video_id
+          video_id: @video_id_2
         }
       else
         opt = {
           max_results: 50,
           page_token: next_page_token,
           text_format: 'plainText',
-          video_id: @video_id
+          video_id: @video_id_2
         }
       end
 
@@ -85,9 +102,12 @@ class SearchController < ApplicationController
         end
       rescue
         @comments = "このIDの動画は存在しません。"
+        return
       end
     else
       @comments = "IDを入力してください。"
+      @num = 0
+      return
     end
   end
   

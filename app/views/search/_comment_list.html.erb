@@ -53,7 +53,7 @@
 	<% if @next_page_token %>
 		<div id="comment_list_<%= @num + 1 %>" class="comment_list">
 			<div class="next_page">
-				<span><%= link_to "他のコメントを表示", root_path(video_id: @video_id, sort: @sort, next_page_token: @next_page_token, num: @num), remote: :true %></span>
+				<span><%= link_to "他のコメントを表示", root_path(video_id: @video_id, video_id_2: @video_id_2, sort: @sort, next_page_token: @next_page_token, num: @num), remote: :true %></span>
 				<div class="cv-spinner">
 					<span class="spinner"></span>
 				</div>
