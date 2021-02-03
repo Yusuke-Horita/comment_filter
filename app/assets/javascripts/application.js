@@ -18,10 +18,10 @@
 
 
 $(function(){
-		if ($("#video_id").val().length == 0) {
+		if ($("#url").val().length == 0) {
 			$(".submit , .submit_type_2").prop("disabled", true);
 		}
-	$("#video_id").on("keydown keyup keypress change", function() {
+	$("#url").on("keydown keyup keypress change", function() {
 		if ($(this).val().length < 1) {
 			$(".submit , .submit_type_2").prop("disabled", true);
 		} else {
@@ -32,6 +32,7 @@ $(function(){
 
 $(function() {
 	$(document).on('click', ".submit", function(){
+		console.log("クリック")
 		$(this).removeClass('submit');
 		$(this).addClass('submit_type_2');
 		$('.cv-spinner').css('display', 'flex');
@@ -101,7 +102,7 @@ var startPos = 0,winScrollTop = 0;
 $(window).on('scroll',function(){
 		winScrollTop = $(this).scrollTop();
 		if (!$('.search-wrapper').hasClass('active')) {
-			if (winScrollTop >= startPos) {
+			if (winScrollTop > startPos) {
 				$('.search-wrapper').fadeOut();
     	} else {
         $('.search-wrapper').fadeIn();

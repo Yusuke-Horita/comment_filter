@@ -21,6 +21,7 @@
  }
 
  body {
+	font-family: sans-serif;
 	 background-color: #181818;
 	 color: #FFFFFF;
  }
@@ -118,6 +119,10 @@
 	 border-radius: 50%;
  }
 
+ .cv-spinner {
+	 display: none;
+ }
+
  .next_page .cv-spinner {
 	 height: 60px;
 	 display: flex;
@@ -128,18 +133,17 @@
  .comment_replies .cv-spinner {
 	 height: 30px;
 	 margin-top: 10px;
-	 display: none;
- }
-
- .filter .cv-spinner {
-	 display: none;
  }
 
  .cv-spinner-large {
-	height: 100vh;
-	display: flex;
-	justify-content: center;
-	align-items: center;
+	 position: absolute;
+	 top: 0;
+	 left: 0;
+	 width: 100%;
+	 height: 100%;
+	 display: flex;
+	 justify-content: center;
+	 align-items: center;
  }
 
  .spinner {
@@ -390,7 +394,6 @@ fieldset.active {
 
 .toppage_text {
 	width: 100%;
-	margin-left: 1%;
 	text-align: center;
 	position: absolute;
 	top: 58%;

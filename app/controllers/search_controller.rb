@@ -1,30 +1,30 @@
 class SearchController < ApplicationController
   def find_comments
-    @video_id =  ""
+    @url =  ""
     @sort = "評価順"
 
-    if params[:video_id] != "" && params[:video_id] != nil
+    if params[:url] != "" && params[:url] != nil
 
       require 'google/apis/youtube_v3'
       youtube = Google::Apis::YoutubeV3::YouTubeService.new
       youtube.key = ENV['API_KEY']
 
-      @video_id = params[:video_id]
+      @url = params[:url]
       @sort = params[:sort]
 
-      if @video_id.include?("&feature=youtu.be")
-        @video_id = @video_id.gsub("&feature=youtu.be", "")
+      if @url.include?("&feature=youtu.be")
+        @url = @url.gsub("&feature=youtu.be", "")
       end
 
       if params[:num] == nil
         @num = 0
 
-        if @video_id.include?("https://www.youtube.com/watch?v=")
-          @video_id_2 = @video_id.gsub("https://www.youtube.com/watch?v=", "")
-        elsif @video_id.include?("https://m.youtube.com/watch?v=")
-          @video_id_2 = @video_id.gsub("https://m.youtube.com/watch?v=", "")
-        elsif @video_id.include?("https://youtu.be/")
-          @video_id_2 = @video_id.gsub("https://youtu.be/", "")
+        if @url.include?("https://www.youtube.com/watch?v=")
+          @video_id = @url.gsub("https://www.youtube.com/watch?v=", "")
+        elsif @url.include?("https://m.youtube.com/watch?v=")
+          @video_id = @url.gsub("https://m.youtube.com/watch?v=", "")
+        elsif @url.include?("https://youtu.be/")
+          @video_id = @url.gsub("https://youtu.be/", "")
         else
           @comments = "このURLの動画は存在しません。"
           @num = 0
@@ -32,7 +32,7 @@ class SearchController < ApplicationController
         end
       else
         @num = params[:num].to_i + 1
-        @video_id_2 = params[:video_id_2]
+        @video_id = params[:video_id]
         next_page_token = params[:next_page_token]
       end
 
@@ -42,14 +42,14 @@ class SearchController < ApplicationController
           order: "relevance",
           page_token: next_page_token,
           text_format: 'plainText',
-          video_id: @video_id_2
+          video_id: @video_id
         }
       else
         opt = {
           max_results: 50,
           page_token: next_page_token,
           text_format: 'plainText',
-          video_id: @video_id_2
+          video_id: @video_id
         }
       end
 
