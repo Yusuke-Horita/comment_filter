@@ -77,39 +77,6 @@ $(function() {
 	});
 });
 
-$(function() {
-	var textHeight = $('.yyy').height();
-	var lineHeight = parseFloat($('.yyy').css('line-height'));
-	var lineNum = 2;
-	var textNewHeight = lineHeight * lineNum;
-
-	if (textHeight > textNewHeight) {
-		$('.yyy').css({
-				'height': textNewHeight,
-				'overflow':'hidden'
-		 });
-		$('.comment_body_renderer span').show();
-		$(document).on('click', '.comment_body_renderer span', function(){
-			$(this).addClass('active');
-			$(this).text('一部を表示')
-			$('.yyy').css({
-				'height': textHeight,
-				'overflow':'visible'
-			 });
-		});
-		$(document).on('click', '.comment_body_renderer .active', function(){
-			$(this).removeClass('active');
-			$(this).text('続きを見る');
-			$('.yyy').css({
-				'height': textNewHeight,
-				'overflow':'hidden'
-			 });
-		});
-	};
-});
-
-
-
 function searchToggle(obj, evt){
 	var container = $(obj).closest('.search-wrapper , .search-wrapper-first');
 			if(!container.hasClass('active')){
