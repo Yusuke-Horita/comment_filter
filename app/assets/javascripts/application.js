@@ -52,7 +52,7 @@ $(document).on('click', '.icon--search.type_1', function(){
 });
 
 $(document).on('click', '.icon--search.type_2', function(){
-	$('.search').show().focus();
+	$('.search').show();
 	setTimeout(function(){
 		$('.search').toggleClass('focus');
 		$('#magnify').toggleClass('clicked');
@@ -73,7 +73,6 @@ $(document).on('click', '.radio-container label', function(){
 });
 
 $(document).on('click', '.submit.type_1', function(){
-	$('.search').blur();
 	$('.cv-spinner-large').css('display','flex');
 	$('.form_container').fadeOut('slow');
 	$(this).removeClass('type_1');
@@ -91,7 +90,6 @@ $(document).on('click', '.submit.type_1', function(){
 });
 
 $(document).on('click', '.submit.type_2', function(){
-	$('.search').blur();
 	$('.cv-spinner-large').css('display','flex');
 	setTimeout(function(){
 		$('.search').toggleClass('focus');
