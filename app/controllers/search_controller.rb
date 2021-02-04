@@ -105,7 +105,7 @@ class SearchController < ApplicationController
         return
       end
     else
-      @comments = "IDを入力してください。"
+      @comments = "URLを入力してください。"
       @num = 0
       return
     end
