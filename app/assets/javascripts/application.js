@@ -44,7 +44,6 @@ $(function() {
 });
 
 $(document).on('click', '.icon--search.type_1', function(){
-	console.log("クリック1");
 	$('.search').show();
 	setTimeout(function(){
 		$('.search').toggleClass('focus');
@@ -55,7 +54,6 @@ $(document).on('click', '.icon--search.type_1', function(){
 $(document).on('click', '.icon--search.type_2', function(){
 	$('.search').show().focus();
 	setTimeout(function(){
-		console.log("クリック2");
 		$('.search').toggleClass('focus');
 		$('#magnify').toggleClass('clicked');
 		if($('.radio-container').hasClass('active')){
@@ -75,7 +73,7 @@ $(document).on('click', '.radio-container label', function(){
 });
 
 $(document).on('click', '.submit.type_1', function(){
-	console.log('クリック３')
+	$('.search').focusOut();
 	$('.cv-spinner-large').css('display','flex');
 	$('.form_container').fadeOut('slow');
 	$(this).removeClass('type_1');
@@ -93,7 +91,7 @@ $(document).on('click', '.submit.type_1', function(){
 });
 
 $(document).on('click', '.submit.type_2', function(){
-	console.log('クリック4')
+	$('.search').focusOut();
 	$('.cv-spinner-large').css('display','flex');
 	setTimeout(function(){
 		$('.search').toggleClass('focus');
