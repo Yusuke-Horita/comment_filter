@@ -1,38 +1,53 @@
 <%= form_with url: root_path, method: :get do |f| %>
-<div class="search-wrapper">
-	<div class="input-holder">
-		<%= f.text_field :url, placeholder: "Enter the Video ID", value: @url, class: "search-input" %>
-		<div class="search-icon" onclick="searchToggle(this, event);"><span></span></div>
-		<%= f.submit "submit", class: "submit" %>
-	</div>
-	<span class="close" onclick="searchToggle(this, event);"></span>
-</div>
-<div class="toppage_text">
-	<span>Tap the icon.</span>
+
+<div class="form_container">
+    <div class="input-wrapper">
+			<%= f.text_field :url, placeholder: "Enter the URL", value: @url, class: "search" %>
+      <div id="magnify" v-on:click="search"><svg class="icon icon--search  type_1"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-search"></use></svg></div>
+		</div>
 </div>
 
-<fieldset>
-	<% if @sort == "評価順" %>
-		<%= f.radio_button :sort, :評価順, checked: true, class: "radio-inline__input" %>
-	<% else %>
-		<%= f.radio_button :sort, :評価順, class: "radio-inline__input" %>
-	<% end %>
-	<%= f.label :sort_評価順, "評価順", class: "radio-inline__label" %>
+<svg class="hidden">
+	<defs>
+		<symbol id="icon-search" viewBox="0 0 24 24">
+			<title>search</title>
+			<path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"></path>
+		</symbol>
+	</defs>
+</svg>
 
-	<% if @sort == "新着順" %>
-		<%= f.radio_button :sort, :新着順, checked: true, class: "radio-inline__input" %>
-	<% else %>
-		<%= f.radio_button :sort, :新着順, class: "radio-inline__input" %>
-	<% end %>
-	<%= f.label :sort_新着順, "新着順", class: "radio-inline__label" %>
-</fieldset>
+<div class="radio-container">
+	<ul>
+		<li>
+			<% if @sort == "評価順" %>
+				<%= f.radio_button :sort, :評価順, checked: true %>
+			<% else %>
+				<%= f.radio_button :sort, :評価順 %>
+			<% end %>
+			<%= f.label :sort_評価順, "評価順" %>
+			
+			<div class="check"></div>
+		</li>
+		
+		<li>
+			<% if @sort == "新着順" %>
+				<%= f.radio_button :sort, :新着順, checked: true %>
+			<% else %>
+				<%= f.radio_button :sort, :新着順 %>
+			<% end %>
+			<%= f.label :sort_新着順, "新着順" %>
+			
+			<div class="check"></div>
+		</li>
+	</ul>
+</div>
+
+<%= f.submit "submit", class: "submit type_1" %>
 
 <% end %>
 
 <div id="comment_list_0">
 	<div class="cv-spinner-large">
-		<div class="cv-spinner">
-			<span class="spinner-large"></span>
-		</div>
+		<span class="spinner-large"></span>
 	</div>
 </div>

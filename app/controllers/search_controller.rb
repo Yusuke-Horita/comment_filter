@@ -76,7 +76,7 @@ class SearchController < ApplicationController
 
         if @next_page_token && @comments.size < 50
           @if = "ififif"
-          9.times do
+          19.times do
             opt[:page_token] = @next_page_token
             comments_original = youtube.list_comment_threads(:snippet, opt)
 

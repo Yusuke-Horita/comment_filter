@@ -64,25 +64,18 @@
 	<script>
 		$(function() {
 			$('.replies_renderer span').on('click', function() {
-					$(this).parent().next().css('display', 'flex');
-					$(this).parent().next().children().css({
-						'border':'3px gray solid',
-						'border-top':'3px rgba(0, 0, 0, 0) solid'
-					});
+				$(this).parent().next().css('display', 'flex');
 			});
 			$('.next_page span').on('click', function() {
-					$('.next_page .spinner').css({
-						'border':'3px gray solid',
-						'border-top':'3px rgba(0, 0, 0, 0) solid'
-					});
+				$('.next_page .cv-spinner').css('display', 'flex');
 			});
 		});
 	</script>
 
 <% end %>
 
-<div class="filter">
-	<div class="cv-spinner">
-		<span class="spinner-large"></span>
-	</div>				
-</div>
+<div class="filter"></div>
+
+<div class="cv-spinner-large">
+	<span class="spinner-large"></span>
+</div>	
