@@ -79,7 +79,7 @@ $(document).on('click', '.submit.type_1', function(){
 	$(this).removeClass('type_1');
 	$(this).addClass('type_2');
 	setTimeout(function(){
-		$('.form_container').css('top','8%');
+		$('.form_container').css('top','9%');
 		$('.icon--search').removeClass('type_1');
 		$('.icon--search').addClass('type_2');
 		$('.search').toggleClass('focus');
