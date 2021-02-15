@@ -19,23 +19,23 @@
 <div class="radio-container">
 	<ul>
 		<li>
-			<% if @sort == "評価順" %>
-				<%= f.radio_button :sort, :評価順, checked: true %>
+			<% if @sort == "relevance" %>
+				<%= f.radio_button :sort, :relevance, checked: true %>
 			<% else %>
-				<%= f.radio_button :sort, :評価順 %>
+				<%= f.radio_button :sort, :relevance %>
 			<% end %>
-			<%= f.label :sort_評価順, "評価順" %>
+			<%= f.label :sort_relevance, "評価順" %>
 			
 			<div class="check"></div>
 		</li>
 		
 		<li>
-			<% if @sort == "新着順" %>
-				<%= f.radio_button :sort, :新着順, checked: true %>
+			<% if @sort == "time" %>
+				<%= f.radio_button :sort, :time, checked: true %>
 			<% else %>
-				<%= f.radio_button :sort, :新着順 %>
+				<%= f.radio_button :sort, :time %>
 			<% end %>
-			<%= f.label :sort_新着順, "新着順" %>
+			<%= f.label :sort_time, "新着順" %>
 			
 			<div class="check"></div>
 		</li>

@@ -5,7 +5,6 @@
 	</div>
 
 <% elsif @comments.is_a?(String) %>
-
 	<div style="margin-top: 200px; text-align: center;">
 		<span><%= @comments %></span>
 	</p>
@@ -50,10 +49,10 @@
 			</div>
 		</section>
 	<% end %>
-	<% if @next_page_token %>
+	<% if @page_token %>
 		<div id="comment_list_<%= @num + 1 %>" class="comment_list">
 			<div class="next_page">
-				<span><%= link_to "他のコメントを表示", root_path(url: @url, video_id: @video_id, sort: @sort, next_page_token: @next_page_token, num: @num), remote: :true %></span>
+				<span><%= link_to "他のコメントを表示", root_path(url: @url, video_id: @video_id, sort: @sort, page_token: @page_token, num: @num), remote: :true %></span>
 				<div class="cv-spinner">
 					<span class="spinner"></span>
 				</div>
