@@ -26,14 +26,16 @@ class SearchController < ApplicationController
         20.times do
           res_body = YoutubeApi.comments(@video_id, 50, @sort, @page_token)
           res_body["items"].each do |item|
-            if item["snippet"]["topLevelComment"]["snippet"]["textDisplay"] =~ /(?:\p{Hiragana}|\p{Katakana}|[一-龠々])/
+            text_display = item["snippet"]["topLevelComment"]["snippet"]["textDisplay"]
+            if Translation.detect(text_display) == "ja"
+            # if text_display =~ /(?:\p{Hiragana})/
               hash = {}
               hash[:id] = item["id"]
               hash[:author_display_name] = item["snippet"]["topLevelComment"]["snippet"]["authorDisplayName"]
               hash[:author_profile_image_url] = item["snippet"]["topLevelComment"]["snippet"]["authorProfileImageUrl"]
               hash[:like_count] = item["snippet"]["topLevelComment"]["snippet"]["likeCount"]
               hash[:published_at] = item["snippet"]["topLevelComment"]["snippet"]["publishedAt"]
-              hash[:text_display] = item["snippet"]["topLevelComment"]["snippet"]["textDisplay"]
+              hash[:text_display] = text_display
               hash[:total_reply_count] = item["snippet"]["totalReplyCount"]
               @comments << hash
             end
