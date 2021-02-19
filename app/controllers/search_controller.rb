@@ -24,11 +24,11 @@ class SearchController < ApplicationController
         @comments = []
         @page_token = params[:page_token]
         20.times do
-          res_body = YoutubeApi.comments(@video_id, 50, @sort, @page_token)
+          res_body = YoutubeApi.comments(@video_id, 100, @sort, @page_token)
           res_body["items"].each do |item|
             text_display = item["snippet"]["topLevelComment"]["snippet"]["textDisplay"]
-            if Translation.detect(text_display) == "ja"
-            # if text_display =~ /(?:\p{Hiragana})/
+            # if Translation.detect(text_display) == "ja"
+            if text_display =~ /(?:\p{Hiragana})/
               hash = {}
               hash[:id] = item["id"]
               hash[:author_display_name] = item["snippet"]["topLevelComment"]["snippet"]["authorDisplayName"]
